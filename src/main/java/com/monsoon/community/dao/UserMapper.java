@@ -2,8 +2,10 @@ package com.monsoon.community.dao;
 
 import com.monsoon.community.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface UserMapper {
 
     User selectById(int id);
