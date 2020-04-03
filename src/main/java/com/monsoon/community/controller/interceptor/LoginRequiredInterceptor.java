@@ -1,4 +1,4 @@
-package com.monsoon.community.controller.Interceptor;
+package com.monsoon.community.controller.interceptor;
 
 import com.monsoon.community.annotation.LoginRequired;
 import com.monsoon.community.util.HostHolder;

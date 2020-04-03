@@ -1,4 +1,4 @@
-package com.monsoon.community.controller.Interceptor;
+package com.monsoon.community.controller.interceptor;
 
 import com.monsoon.community.entity.LoginTicket;
 import com.monsoon.community.entity.User;

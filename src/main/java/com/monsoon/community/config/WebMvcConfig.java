@@ -1,8 +1,8 @@
 package com.monsoon.community.config;
 
-import com.monsoon.community.controller.Interceptor.AlphaInterceptor;
-import com.monsoon.community.controller.Interceptor.LoginRequiredInterceptor;
-import com.monsoon.community.controller.Interceptor.LoginTicketInterceptor;
+import com.monsoon.community.controller.interceptor.AlphaInterceptor;
+import com.monsoon.community.controller.interceptor.LoginRequiredInterceptor;
+import com.monsoon.community.controller.interceptor.LoginTicketInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

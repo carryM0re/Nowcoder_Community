@@ -1,4 +1,4 @@
-package com.monsoon.community.controller.Interceptor;
+package com.monsoon.community.controller.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
