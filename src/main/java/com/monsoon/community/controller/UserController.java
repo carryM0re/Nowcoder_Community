@@ -2,6 +2,7 @@ package com.monsoon.community.controller;
 
 import com.monsoon.community.annotation.LoginRequired;
 import com.monsoon.community.entity.User;
+import com.monsoon.community.service.LikeService;
 import com.monsoon.community.service.UserService;
 import com.monsoon.community.util.CommunityUtil;
 import com.monsoon.community.util.HostHolder;
@@ -40,6 +41,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LikeService likeService;
 
     @Autowired
     private HostHolder hostHolder; // 更新的是当前用户，当前用户是从hostHolder里面取
@@ -132,5 +136,21 @@ public class UserController {
         newPassword = CommunityUtil.md5(newPassword + user.getSalt());
         userService.updatePassword(user.getId(), newPassword);
         return "redirect:/logout";
+    }
+
+    // 个人主页
+    @RequestMapping(path = "/profile/{userId}", method = RequestMethod.GET)
+    public String getProfilePage(@PathVariable("userId") int userId, Model model){
+        User user = userService.findUserById(userId);
+        if(user == null){
+            throw new RuntimeException("该用户不存在！");
+        }
+        // 用户
+        model.addAttribute("user", user);
+        // 点赞数量
+        int likeCount = likeService.findUserLikeCount(userId);
+        model.addAttribute("likeCount", likeCount);
+
+        return "/site/profile";
     }
 }

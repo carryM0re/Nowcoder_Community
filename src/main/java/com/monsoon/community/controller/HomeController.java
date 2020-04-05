@@ -4,7 +4,9 @@ import com.monsoon.community.entity.DiscussPost;
 import com.monsoon.community.entity.Page;
 import com.monsoon.community.entity.User;
 import com.monsoon.community.service.DiscussPostService;
+import com.monsoon.community.service.LikeService;
 import com.monsoon.community.service.UserService;
+import com.monsoon.community.util.CommunityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
     @Autowired
     private DiscussPostService discussPostService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page){
@@ -39,6 +44,10 @@ public class HomeController {
                 map.put("post", post);
                 User user = userService.findUserById(post.getUserId()); // ！！！究极坑点：post.getId()  不是Id 是UserId！！！！
                 map.put("user", user);
+
+                long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
+
                 discussPosts.add(map);
             }
         }
