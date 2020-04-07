@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
+@Deprecated // 声明不推荐使用
 public interface LoginTicketMapper {
 
     @Insert({ // 每句话后面最好加一个空格，以免拼的时候挨在一起
