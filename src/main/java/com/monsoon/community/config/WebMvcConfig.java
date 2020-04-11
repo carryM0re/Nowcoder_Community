@@ -3,6 +3,7 @@ package com.monsoon.community.config;
 import com.monsoon.community.controller.interceptor.AlphaInterceptor;
 import com.monsoon.community.controller.interceptor.LoginRequiredInterceptor;
 import com.monsoon.community.controller.interceptor.LoginTicketInterceptor;
+import com.monsoon.community.controller.interceptor.MessageInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -20,6 +21,9 @@ public class WebMvcConfig implements WebMvcConfigurer { // 一般来说配置类
     @Autowired
     private LoginRequiredInterceptor loginRequiredInterceptor;
 
+    @Autowired
+    private MessageInterceptor messageInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) { // 运用传进来的registry这个对象来注册Interceptor
         registry.addInterceptor(alphaInterceptor)
@@ -28,6 +32,8 @@ public class WebMvcConfig implements WebMvcConfigurer { // 一般来说配置类
         registry.addInterceptor(loginTicketInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
         registry.addInterceptor(loginRequiredInterceptor)
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
+        registry.addInterceptor(messageInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
     }
 

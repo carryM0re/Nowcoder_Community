@@ -28,7 +28,7 @@
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">
 								<!-- 没有登录的话不能看到消息 -->
-								<a class="nav-link position-relative" th:href="@{/letter/list}">消息<span class="badge badge-danger">12</span></a>
+								<a class="nav-link position-relative" th:href="@{/letter/list}">消息<span class="badge badge-danger" th:text="${allUnreadCount!=0?allUnreadCount:''}">12</span></a>
 							</li>
 							<li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser==null}">
 								<a class="nav-link" th:href="@{/register}">注册</a> <!-- /site/register or /register ？后者，这里是controller的，不是直接跳到html -->
