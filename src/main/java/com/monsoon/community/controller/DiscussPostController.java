@@ -1,9 +1,7 @@
 package com.monsoon.community.controller;
 
-import com.monsoon.community.entity.Comment;
-import com.monsoon.community.entity.DiscussPost;
-import com.monsoon.community.entity.Page;
-import com.monsoon.community.entity.User;
+import com.monsoon.community.entity.*;
+import com.monsoon.community.event.EventProducer;
 import com.monsoon.community.service.CommentService;
 import com.monsoon.community.service.DiscussPostService;
 import com.monsoon.community.service.LikeService;
@@ -40,6 +38,9 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     private LikeService likeService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody
     public String addDiscussPost(String title, String content){
@@ -54,6 +55,15 @@ public class DiscussPostController implements CommunityConstant {
         post.setTitle(title);
         post.setCreateTime(new Date());
         discussPostService.addDiscussPost(post);
+
+        // 触发发帖事件
+        Event event = new Event()
+                .setTopic(TOPIC_PUBLISH)
+                .setUserId(user.getId())
+                .setEntityType(ENTITY_TYPE_POST)
+                .setEntityId(post.getId());
+
+        eventProducer.fireEvent(event);
 
         // 报错的情况将来统一处理
         return CommunityUtil.getJSONString(0, "发布成功！");
