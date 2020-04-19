@@ -14,7 +14,7 @@ public interface DiscussPostMapper {
     /**
      * userId可能会传也可能不会，不传的时候就不用管，传了的话就用传的id，sql里会动态生成
      */
-    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);
+    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit, int orderMode);
 
     /**@Param给参数取别名
      * 如果只有一个参数，并且在<if>里使用，就必须加别名
@@ -31,4 +31,6 @@ public interface DiscussPostMapper {
     int updateType(int id, int type);
 
     int updateStatus(int id, int status);
+
+    int updateScore(int id, double score);
 }
