@@ -13,9 +13,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>community</name>
 	<description>monsoon community</description>
-	<packaging>war</packaging>
+<!--	<packaging>war</packaging>-->
 
 	<properties>
+<!--		<java.version>8</java.version>-->
 		<java.version>11</java.version>
 	</properties>
 
@@ -118,7 +119,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>ROOT</finalName>
+<!--		<finalName>ROOT</finalName>-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
